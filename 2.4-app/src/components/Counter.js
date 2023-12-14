@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
+import PriceInput from "./PriceInput";
 
 function Counter() {
   const [count, setCount] = useState(0);
@@ -11,7 +12,7 @@ function Counter() {
 
   const [name, setName] = useState("");
   // const name = "Banana";
-  const price = 2.99;
+  //const price = 2.99;
 
   console.log("name", name);
 
@@ -29,6 +30,14 @@ function Counter() {
     setName(event.target.value);
   };
 
+  const [price, setPrice] = useState("2.99");
+  const priceDisplay = price >= 0 ? price : 0;
+
+  const handlePriceChange = (event) => {
+    // console.log(event);
+    setPrice(event.target.value);
+  };
+
   return (
     <>
       {/* <h1>Product</h1> */}
@@ -41,6 +50,7 @@ function Counter() {
       </div>
       {/* {name} */}
       <Input value={name} label="Product" onChange={handleNameChange} />
+      <PriceInput value={price} label="Price" onChange={handlePriceChange} />
       {/* onClick on this button is an event handler */}
       {/* <button onClick={handleMinus}>-</button> */}
       {/* onClick on this Button component is actually a prop */}
@@ -56,7 +66,7 @@ function Counter() {
           onClick={() => setCount(0)}
         />
       </div>
-      <h2>{`$ ${price}`} each</h2>
+      <h2>{`$ ${priceDisplay}`} each</h2>
       <h3>{`Discount: ${discount}%`}</h3>
     </>
   );
